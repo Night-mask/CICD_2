@@ -1,0 +1,25 @@
+---
+- name: Install Docker and run Nginx container on port 8090
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Pull Nginx Docker image
+      community.docker.docker_image:
+        name: nginx
+        source: pull
+        state: present
+
+    - name: Run Nginx container on port 8090
+      community.docker.docker_container:
+        name: nginx_container
+        image: nginx
+        ports:
+          - "8090:80"
+        state: started
+...
