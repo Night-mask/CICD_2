@@ -1,0 +1,16 @@
+---
+apiversion: V1
+kind: Deployment
+metadata: 
+  name: nodejs
+  labels: nodejs1
+
+spec: 
+ replicas: 2
+ selectors:
+   labels: nodejs
+   template: 
+    image: nodejs
+    container:
+      port:5000
+...
